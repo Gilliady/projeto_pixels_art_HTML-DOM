@@ -4,29 +4,60 @@ const createElementWithTag = (parentElement, tag, className) => {
   parentElement.appendChild(element);
   return element;
 };
-const colorPalette = document.createElement('section');
-
-colorPalette.id = 'color-palette';
 
 const header = document.querySelector('header');
-
-header.appendChild(colorPalette);
 const colorList = [];
 for (let index = 0; index < 4; index += 1) {
-  const elementCreated = createElementWithTag(colorPalette, 'section', 'color');
+  const elementCreated = createElementWithTag(
+    document.querySelector('#color-palette'),
+    'section',
+    'color',
+  );
   colorList.push(elementCreated);
 }
 const randomButton = document.createElement('button');
+
 randomButton.id = 'button-random-color';
+
 randomButton.innerHTML = 'Cores aleatórias';
+
 header.appendChild(randomButton);
+
 colorList[0].style.backgroundColor = 'black';
 
+let colorObject = ['black', '', '', ''];
+
+const generateColor = () => {
+  const r = Math.floor(Math.random() * 255);
+  const g = Math.floor(Math.random() * 255);
+  const b = Math.floor(Math.random() * 255);
+  return `rgb(${r}, ${g}, ${b})`;
+};
+
 const generateNewPalette = () => {
-  for (let index = 1; index < colorList.length; index += 1) {
-    const newColor = `rgb(${Math.random() * 256}, ${Math.random() * 256}, ${Math.random() * 256})`;
-    colorList[index].style.backgroundColor = newColor;
+  colorObject[1] = generateColor();
+  colorObject[2] = generateColor();
+  colorObject[3] = generateColor();
+  localStorage.setItem('colorPalette', JSON.stringify(colorObject));
+  for (let index = 0; index < colorList.length; index += 1) {
+    colorList[index].style.backgroundColor = colorObject[index];
   }
 };
-window.onload = () => { generateNewPalette(); };
+
 randomButton.addEventListener('click', generateNewPalette);
+
+const loadColors = () => {
+  if (localStorage.getItem('colorPalette')) {
+    console.log('teste');
+    colorObject = JSON.parse(localStorage.getItem('colorPalette'));
+    for (let index = 0; index < colorList.length; index += 1) {
+      colorList[index].style.backgroundColor = colorObject[index];
+    }
+  } else {
+    generateNewPalette();
+  }
+};
+
+window.onload = (event) => {
+  loadColors();
+};
