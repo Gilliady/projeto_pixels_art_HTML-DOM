@@ -16,8 +16,17 @@ for (let index = 0; index < 4; index += 1) {
   const elementCreated = createElementWithTag(colorPalette, 'section', 'color');
   colorList.push(elementCreated);
 }
-
+const randomButton = document.createElement('button');
+randomButton.id = 'button-random-color';
+randomButton.innerHTML = 'Cores aleatórias';
+header.appendChild(randomButton);
 colorList[0].style.backgroundColor = 'black';
-colorList[1].style.backgroundColor = 'red';
-colorList[2].style.backgroundColor = 'green';
-colorList[3].style.backgroundColor = 'blue';
+
+const generateNewPalette = () => {
+  for (let index = 1; index < colorList.length; index += 1) {
+    const newColor = `rgb(${Math.random() * 256}, ${Math.random() * 256}, ${Math.random() * 256})`;
+    colorList[index].style.backgroundColor = newColor;
+  }
+};
+window.onload = () => { generateNewPalette(); };
+randomButton.addEventListener('click', generateNewPalette);

@@ -2,11 +2,6 @@
   text-align: center;
 }
 
-#color-palette {
-  display: inline-block;
-  width: 40%;
-}
-
 .color {
   border: solid black 1px;
   display: inherit;
@@ -14,4 +9,13 @@
   margin-left: 5%;
   margin-right: 5%;
   width: 32px;
+}
+
+#color-palette {
+  display: inline-block;
+  width: 40%;
+}
+
+#button-random-color {
+  display: block;
 }
