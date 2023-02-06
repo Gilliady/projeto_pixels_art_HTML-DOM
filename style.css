@@ -1,0 +1,11 @@
+* {
+  text-align: center;
+}
+#color-palette {
+  display: inline-block;
+}
+.color {
+  border: solid black 1px;
+  height: 32px;
+  width: 32px;
+}
