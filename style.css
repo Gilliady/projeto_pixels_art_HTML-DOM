@@ -1,11 +1,17 @@
 * {
   text-align: center;
 }
+
 #color-palette {
   display: inline-block;
+  width: 40%;
 }
+
 .color {
   border: solid black 1px;
+  display: inherit;
   height: 32px;
+  margin-left: 5%;
+  margin-right: 5%;
   width: 32px;
 }
