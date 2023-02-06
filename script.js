@@ -60,11 +60,6 @@ const loadColors = () => {
   }
 };
 
-window.onload = () => {
-  colorList[0].classList.add('selected');
-  loadColors();
-};
-
 const selectColor = (event) => {
   const selectedColor = document.querySelector('.selected');
   if (selectedColor !== null) {
@@ -86,14 +81,39 @@ const changeColor = (target, selectedColor) => {
   pixel.style.backgroundColor = selectedColor;
 };
 
+const saveDrawing = () => {
+  const colorPixels = [];
+  for (let index = 0; index < pixels.length; index += 1) {
+    colorPixels.push(pixels[index].style.backgroundColor);
+    localStorage.setItem('pixelBoard', JSON.stringify(colorPixels));
+  }
+};
+
+const loadDrawing = () => {
+  const colors = JSON.parse(localStorage.getItem('pixelBoard'));
+  for (let index = 0; index < pixels.length; index += 1) {
+    changeColor(pixels[index], colors[index]);
+  }
+};
+
 for (let index = 0; index < pixels.length; index += 1) {
   pixels[index].addEventListener('click', () => {
     const selectedColor = document.querySelector('.selected');
     changeColor(pixels[index], selectedColor.style.backgroundColor);
+    saveDrawing();
   });
 }
 clearButton.addEventListener('click', () => {
   for (let index = 0; index < pixels.length; index += 1) {
-    changeColor(pixels[index], ('white'));
+    changeColor(pixels[index], 'white');
   }
+  saveDrawing();
 });
+
+window.onload = () => {
+  colorList[0].classList.add('selected');
+  loadColors();
+  if (localStorage.getItem('pixelBoard') !== null) {
+    loadDrawing();
+  }
+};
