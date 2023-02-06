@@ -77,3 +77,14 @@ for (let index = 0; index < colorList.length; index += 1) {
     selectColor(event);
   });
 }
+
+const pixels = document.querySelectorAll('.pixel');
+
+
+
+for (let index = 0; index < pixels.length; index += 1) {
+  pixels[index].addEventListener('click', () => {
+    const selectedColor = document.querySelector('.selected');
+    pixels[index].style.backgroundColor = selectedColor.style.backgroundColor;
+  })
+}

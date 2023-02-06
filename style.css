@@ -24,7 +24,9 @@
   width: 40px;
 }
 #pixel-board {
+  margin: 0;
   border: 1px solid black;
   display: inline-block;
+  line-height: 0.5;
   width: auto;
 }
