@@ -1,5 +1,6 @@
 * {
   text-align: center;
+  margin: 0;
 }
 
 .color {
@@ -23,10 +24,11 @@
   height: 40px;
   width: 40px;
 }
+
 #pixel-board {
   margin: 0;
   border: 1px solid black;
-  display: inline-block;
+  display: inline-table;
   line-height: 0.5;
   width: auto;
 }

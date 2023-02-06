@@ -11,18 +11,21 @@ for (let index = 0; index < 4; index += 1) {
   const elementCreated = createElementWithTag(
     document.querySelector('#color-palette'),
     'section',
-    'color'
+    'color',
   );
   colorList.push(elementCreated);
 }
 const randomButton = document.createElement('button');
 
 randomButton.id = 'button-random-color';
-
 randomButton.innerHTML = 'Cores aleatórias';
-
 header.appendChild(randomButton);
 
+header.appendChild(document.createElement('br'));
+const clearButton = document.createElement('button');
+clearButton.id = 'clear-board';
+clearButton.innerHTML = 'Limpar';
+header.appendChild(clearButton);
 colorList[0].style.backgroundColor = 'black';
 
 let colorObject = ['black', '', '', ''];
@@ -48,7 +51,6 @@ randomButton.addEventListener('click', generateNewPalette);
 
 const loadColors = () => {
   if (localStorage.getItem('colorPalette')) {
-    console.log('teste');
     colorObject = JSON.parse(localStorage.getItem('colorPalette'));
     for (let index = 0; index < colorList.length; index += 1) {
       colorList[index].style.backgroundColor = colorObject[index];
@@ -64,7 +66,6 @@ window.onload = () => {
 };
 
 const selectColor = (event) => {
-  console.log('click');
   const selectedColor = document.querySelector('.selected');
   if (selectedColor !== null) {
     selectedColor.classList.remove('selected');
@@ -80,11 +81,19 @@ for (let index = 0; index < colorList.length; index += 1) {
 
 const pixels = document.querySelectorAll('.pixel');
 
-
+const changeColor = (target, selectedColor) => {
+  const pixel = target;
+  pixel.style.backgroundColor = selectedColor;
+};
 
 for (let index = 0; index < pixels.length; index += 1) {
   pixels[index].addEventListener('click', () => {
     const selectedColor = document.querySelector('.selected');
-    pixels[index].style.backgroundColor = selectedColor.style.backgroundColor;
-  })
+    changeColor(pixels[index], selectedColor.style.backgroundColor);
+  });
 }
+clearButton.addEventListener('click', () => {
+  for (let index = 0; index < pixels.length; index += 1) {
+    changeColor(pixels[index], ('white'));
+  }
+});
