@@ -11,7 +11,7 @@ for (let index = 0; index < 4; index += 1) {
   const elementCreated = createElementWithTag(
     document.querySelector('#color-palette'),
     'section',
-    'color',
+    'color'
   );
   colorList.push(elementCreated);
 }
@@ -58,6 +58,22 @@ const loadColors = () => {
   }
 };
 
-window.onload = (event) => {
+window.onload = () => {
+  colorList[0].classList.add('selected');
   loadColors();
 };
+
+const selectColor = (event) => {
+  console.log('click');
+  const selectedColor = document.querySelector('.selected');
+  if (selectedColor !== null) {
+    selectedColor.classList.remove('selected');
+  }
+  event.target.classList.add('selected');
+};
+
+for (let index = 0; index < colorList.length; index += 1) {
+  colorList[index].addEventListener('click', (event) => {
+    selectColor(event);
+  });
+}
