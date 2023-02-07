@@ -22,6 +22,7 @@ const boardSizeButton = document.createElement('button');
 boardSizeInput.id = 'board-size';
 boardSizeButton.id = 'generate-board';
 boardSizeButton.innerHTML = 'VQV';
+boardSizeInput.type = 'number';
 boardSizeInput.min = '1';
 boardSizeInput.max = '50';
 header.appendChild(boardSizeInput);
